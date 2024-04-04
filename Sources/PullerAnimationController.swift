@@ -34,15 +34,17 @@ final class PullerAnimationController: NSObject {
                          until detent: PullerModel.Detent,
                          using transitionContext: UIViewControllerContextTransitioning) {
         
+        toViewController.view.frame.origin.y = UIScreen.main.bounds.maxY
         previousCornerRadius = fromViewController.view.layer.cornerRadius
 
         let adjustedDetent = adjustDetent(detent, toViewController: toViewController)
-        toViewController.view.frame.origin.y = UIScreen.main.bounds.maxY
         let toView = pullerPresentationController?.toView
         let viewHeight = screenHeight * adjustedDetent.value - model.inset
-        let frame = toViewController.view.frame
+        let frame = toView?.frame ?? .zero
         CATransaction.disableAnimations {
-            toView?.frame = CGRect(origin: frame.origin, size: CGSize(width: frame.size.width, height: viewHeight))
+            toView?.frame = CGRect(origin: CGPoint(x: frame.origin.x,
+                                                   y: UIScreen.main.bounds.maxY),
+                                   size: CGSize(width: frame.size.width, height: viewHeight))
         }
         
         model.animator.animate { [weak self] in
