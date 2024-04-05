@@ -612,8 +612,10 @@ final public class PullerPresentationController: UIPresentationController {
             detentY = max(calcPosition(detent: selectedDetent) - keyboardHeight, minY)
             
             let detentValue = (screenHeight - detentY) / screenHeight
-            keyboardDetents.append(.custom(detentValue))
-            keyboardDetents = keyboardDetents.sorted(by: <)
+            if detents.last?.value != detentValue {
+                keyboardDetents.append(.custom(detentValue))
+                keyboardDetents = keyboardDetents.sorted(by: <)
+            }
         }
         
         let height = keyboardHeight - (detentY - rawY)
