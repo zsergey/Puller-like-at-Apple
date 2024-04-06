@@ -31,6 +31,9 @@ public struct PullerModel {
     /// Should a puller be expanded to the maximum `detent` when scrolling up?
     public let scrollingExpandsWhenScrolledToEdge: Bool
 
+    /// Should a puller be sensitive to the keyboard?
+    public let isSensitiveToKeyboard: Bool
+    
     /// Should a puller be expanded to the maximum `detent` when the keyboard appears?
     public let keyboardExpands: Bool
 
@@ -76,6 +79,7 @@ public struct PullerModel {
                 dragIndicator: DragIndicator = .none,
                 isModalInPresentation: Bool = false,
                 scrollingExpandsWhenScrolledToEdge: Bool = true,
+                isSensitiveToKeyboard: Bool = true,
                 keyboardExpands: Bool = true,
                 largestUndimmedDetent: Detent = .zero,
                 decelerationRate: CGFloat = 0.99,
@@ -91,6 +95,7 @@ public struct PullerModel {
         self.dragIndicator = dragIndicator
         self.isModalInPresentation = isModalInPresentation
         self.scrollingExpandsWhenScrolledToEdge = scrollingExpandsWhenScrolledToEdge
+        self.isSensitiveToKeyboard = isSensitiveToKeyboard
         self.keyboardExpands = keyboardExpands
         self.largestUndimmedDetent = largestUndimmedDetent
         self.decelerationRate = decelerationRate

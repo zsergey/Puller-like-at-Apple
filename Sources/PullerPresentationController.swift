@@ -554,6 +554,11 @@ final public class PullerPresentationController: UIPresentationController {
     }
     
     private func setupKeyboard() {
+        
+        guard model.isSensitiveToKeyboard else {
+            return
+        }
+        
         keyboard.subscribeToNotifications()
 
         keyboard.onWillShow = { [weak self] parameters in
