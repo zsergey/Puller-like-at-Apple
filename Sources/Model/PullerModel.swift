@@ -73,6 +73,12 @@ public struct PullerModel {
     /// Uses compact width size on iPads.
     public var isCompactPadSize: Bool
     
+    /// Uses 3D Effect for the behind View Controller
+    public var has3DEffect: Bool
+    
+    /// Behaves like rubberbanding in edge cases
+    public var isRubberbanding: Bool
+
     public init(animator: PullerAnimator = .default,
                 detents: [Detent],
                 cornerRadius: CGFloat = 16,
@@ -88,7 +94,9 @@ public struct PullerModel {
                 hasCircleCloseButton: Bool = true,
                 supportsInteractivePopGesture: Bool = true,
                 embeddingViewToScrollView: Bool = false,
-                isCompactPadSize: Bool = true) {
+                isCompactPadSize: Bool = true,
+                has3DEffect: Bool = true,
+                isRubberbanding: Bool = true) {
         self.detents = detents
         self.animator = animator
         self.cornerRadius = cornerRadius
@@ -105,6 +113,8 @@ public struct PullerModel {
         self.supportsInteractivePopGesture = supportsInteractivePopGesture
         self.embeddingViewToScrollView = embeddingViewToScrollView
         self.isCompactPadSize = isCompactPadSize
+        self.has3DEffect = has3DEffect
+        self.isRubberbanding = isRubberbanding
     }
 }
 

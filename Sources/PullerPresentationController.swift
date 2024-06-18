@@ -759,9 +759,13 @@ final public class PullerPresentationController: UIPresentationController {
         
         CATransaction.disableAnimations {
             if isBouncing {
-                let exponent: CGFloat = 0.7
-                let offset = -pow(abs(pointOfMoving.x), exponent)
-                toView.transform = lastTransformOfToView.concatenating(CGAffineTransform(translationX: offset, y: 0))
+                if model.isRubberbanding {
+                    let exponent: CGFloat = 0.7
+                    let offset = -pow(abs(pointOfMoving.x), exponent)
+                    toView.transform = lastTransformOfToView.concatenating(CGAffineTransform(translationX: offset, y: 0))
+                } else {
+                    toView.frame.origin.x = 0
+                }
             } else {
                 toView.transform = toView.transform.concatenating(CGAffineTransform(translationX: translation.x, y: 0))
                 lastTransformOfToView = toView.transform
@@ -862,7 +866,11 @@ final public class PullerPresentationController: UIPresentationController {
         
         CATransaction.disableAnimations {
             if isBouncing {
-                toView.transform = lastTransformOfToView.concatenating(CGAffineTransform(translationX: 0, y: offset))
+                if model.isRubberbanding {
+                    toView.transform = lastTransformOfToView.concatenating(CGAffineTransform(translationX: 0, y: offset))
+                } else {
+                    toView.frame.origin.y = isCrossingFirstDetent ? firstDetentY : lastDetentY
+                }
             } else {
                 toView.transform = toView.transform.concatenating(CGAffineTransform(translationX: 0, y: translation.y))
                 lastTransformOfToView = toView.transform
@@ -1032,7 +1040,8 @@ final public class PullerPresentationController: UIPresentationController {
 
     private func update3DScale() {
         
-        guard let lastDetent = detents.last,
+		guard model.has3DEffect,
+			  let lastDetent = detents.last,
               lastDetent.isExpanded,
               isPhone,
               screenHeight > screenWidth,
