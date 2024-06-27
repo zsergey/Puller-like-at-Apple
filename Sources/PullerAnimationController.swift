@@ -124,8 +124,11 @@ final class PullerAnimationController: NSObject {
     
     private func adjustDetent(_ detent: PullerModel.Detent, toViewController: UIViewController) -> PullerModel.Detent {
         
-        let defaultHeight = toViewController.view.intrinsicContentSize.height
-        let hasDefaultHeight = defaultHeight != UIView.noIntrinsicMetric
+        var defaultHeight = toViewController.view.intrinsicContentSize.height
+        if defaultHeight == UIView.noIntrinsicMetric {
+            defaultHeight = toViewController.preferredContentSize.height
+        }
+        let hasDefaultHeight = defaultHeight > 0
         
         if detent.isFitContent && hasDefaultHeight {
             
