@@ -1,10 +1,3 @@
-//
-//  AppDelegate.m
-//  AppleInspiredPuller
-//
-//  Created by Sergey Zapuhlyak on 14.02.2023.
-//
-
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
@@ -14,7 +7,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    return YES;
+  return YES;
 }
 
 @end
