@@ -9,16 +9,7 @@ import SwiftUI
 import Puller
 
 class SwiftUIViewController: UIViewController {
-    
-    private class RootView: UIView {
-        
-        override var frame: CGRect {
-            didSet {
-                subviews.first?.frame = CGRect(origin: .zero, size: frame.size)
-            }
-        }
-    }
-    
+
     var typeView: MainViewController.Item.TypeSwifUIView
     
     init(typeView: MainViewController.Item.TypeSwifUIView) {
@@ -29,16 +20,7 @@ class SwiftUIViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func loadView() {
-        switch typeView {
-        case .nativeScrollView, .nativeList:
-            view = UIView()
-        case .scrollView, .list:
-            view = RootView()
-        }
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,14 +31,10 @@ class SwiftUIViewController: UIViewController {
         if #available(iOS 15.0, *) {
             let hostingController: UIViewController
             switch typeView {
-            case .nativeScrollView:
-                hostingController = UIHostingController(rootView: DemoScrollView())
-            case .nativeList:
-                hostingController = UIHostingController(rootView: DemoList())
             case .scrollView:
-                hostingController = PullerHostingController(rootView: DemoScrollView())
+                hostingController = UIHostingController(rootView: DemoScrollView())
             case .list:
-                hostingController = PullerHostingController(rootView: DemoList())
+                hostingController = UIHostingController(rootView: DemoList())
             }
             addChild(hostingController)
             hostingController.didMove(toParent: self)

@@ -58,8 +58,9 @@ class MainViewController: UIViewController {
             items += [.apple(name: "Color Picker: Medium, Large", detents: [.medium, .large], type: .color)]
         }
         if #available(iOS 15.0, *) {
-            items += [.apple(name: "SwiftUI: ScrollView", detents: [.custom(0.25), .medium, .large], type: .swiftUI(.nativeScrollView))]
-            items += [.apple(name: "SwiftUI: List", detents: [.custom(0.25), .medium, .large], type: .swiftUI(.nativeList))]
+            items += [.apple(name: "SwiftUI: ScrollView", detents: [.custom(0.25), .medium, .large], type: .swiftUI(.scrollView))]
+            items += [.apple(name: "SwiftUI: List", detents: [.custom(0.25), .medium, .large], type: .swiftUI(.list))]
+            items += [.apple(name: "SwiftUI: List (medium)", detents: [.medium], type: .swiftUI(.list))]
         }
 
         return items
@@ -87,6 +88,7 @@ class MainViewController: UIViewController {
         if #available(iOS 15.0, *) {
             items += [.custom(name: "SwiftUI: ScrollView", detents: [.custom(0.25), .medium, .full], type: .swiftUI(.scrollView))]
             items += [.custom(name: "SwiftUI: List", detents: [.custom(0.25), .medium, .full], type: .swiftUI(.list))]
+            items += [.custom(name: "SwiftUI: List (medium)", detents: [.medium], type: .swiftUI(.list))]
         }
         
         items += [.custom(name: "Image", detents: [.fitsContent], type: .image(hasContent: false))]
@@ -289,8 +291,6 @@ extension MainViewController {
     struct Item {
         
         enum TypeSwifUIView {
-            case nativeScrollView
-            case nativeList
             case scrollView
             case list
         }
